@@ -1,0 +1,10 @@
+SELECT C.ID
+    , C.GENOTYPE AS 'GENOTYPE'
+    , P.GENOTYPE AS 'PARENT_GENOTYPE'
+# 동일 데이터 테이블이지만 자식과 부모 입장으로 참조
+FROM ECOLI_DATA AS C # CHILD
+    , ECOLI_DATA AS P # PARENT
+# 부모의 형질을 모두 가진(& 비트연산) 케이스만
+WHERE C.PARENT_ID = P.ID
+    AND P.GENOTYPE & C.GENOTYPE = P.GENOTYPE
+ORDER BY 1 ASC
